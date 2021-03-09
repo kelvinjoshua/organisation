@@ -40,4 +40,18 @@ public class Departments {
     public void setUser(int user) {
         this.user = user;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Departments)) return false;
+        Departments test = (Departments) o;
+        return user == test.user&&
+                Objects.equals(name, test.name) &&
+                Objects.equals(description, test.description);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, description, user);
+    }
 }

@@ -25,8 +25,8 @@ public class App {
               sql2oUserDao usersObj;
               Connection conn;
               Gson gson = new Gson(); /*convert obj to java from json and back*/
-              String connectionString ="";
-              Sql2o sql2o = new Sql2o("");
+              String connectionString ="jdbc:postgresql://ec2-54-159-175-113.compute-1.amazonaws.com:5432/db3f6fp0tt5q0p";
+              Sql2o sql2o = new Sql2o(connectionString, "vfouuxjniurlir","01aebc052cb6f50d8ebb2c321e70f6e168d06e8b43994bb320e5f34b08a7bd43");
 
               /*Connections*/
               departmentObj = new sql2oDepartmentDao(sql2o);

@@ -32,6 +32,17 @@ public class App {
                   return gson.toJson(department);
               });
 
+              get("/departments", "application/json", (req, res) -> {
+                  res.type("application/json");
+                  System.out.println(departmentObj.getAll());
+                  if(departmentObj.getAll().size() > 0){
+                      return gson.toJson(
+                              departmentObj.getAll());
+                  }
+                  else {
+                      return "{\"message\":\"No departments are currently in the database.\"}";
+                  }
+              });
 
 
 

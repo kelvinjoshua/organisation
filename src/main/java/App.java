@@ -135,7 +135,12 @@ public class App {
                   return gson.toJson(news);
               }
               );
-
+            /*Get news of a certain department*/
+              get("/departments/:id/departmentNews", "application/json", (request, response) -> {
+                  int id = Integer.parseInt(request.params("id"));
+                  Departments departmentToFind = departmentObj.findById(id);
+                  return gson.toJson(newsObj.getAllNewsByDepartment(id)); /**/
+              });
             //filters
               after((req, res) ->{
                   res.type("application/json");

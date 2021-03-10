@@ -34,12 +34,12 @@ public class App {
               newsObj = new sql2oNewsDao(sql2o);
               conn = sql2o.open();
               /*sample to see if project deploys*/
-
+                /*
               get("/", (request, response) -> {
                   Map<String, Object> model = new HashMap<String, Object>();
                   return new ModelAndView(model, "index.hbs");
               }, new HandlebarsTemplateEngine());
-
+            /*
               /*C*/
               post("/departments/new", "application/json", (request, response) -> {
                   Departments department = gson.fromJson(request.body(), Departments.class);

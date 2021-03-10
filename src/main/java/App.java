@@ -81,6 +81,17 @@ public class App {
                   return gson.toJson(user);
               }
               );
+              /*Add user to department*/
+              post("/departments/:id/users/new", "application/json", (req, res) -> {
+                  int departmentId = Integer.parseInt(req.params("id"));
+                  Users users = gson.fromJson(req.body(), Users.class);
+                  users.setId(departmentId);
+                  usersObj.add(users);
+                  res.status(201);
+                  res.type("application/json");
+                  return gson.toJson(users);
+              }
+              );
 
               get("/users", "application/json", (req, res) -> {
                   res.type("application/json");
@@ -103,5 +114,6 @@ public class App {
                   res.type("application/json");
               });
               /*Exception*/
+
       }
 }

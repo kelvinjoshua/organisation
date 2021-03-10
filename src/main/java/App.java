@@ -23,5 +23,17 @@ public class App {
               usersObj= new sql2oUserDao(sql2o);
               newsObj = new sql2oNewsDao(sql2o);
               conn = sql2o.open();
+
+              /*C*/
+              post("/departments/new", "application/json", (request, response) -> {
+                  Departments department = gson.fromJson(request.body(), Department.class);
+                  DepartmentDao.add(department);
+                  response.status(201);
+                  return gson.toJson(department);
+              });
+            //filters
+              after((req, res) ->{
+                  res.type("application/json");
+              });
       }
 }

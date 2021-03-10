@@ -82,6 +82,22 @@ public class App {
               }
               );
 
+              get("/users", "application/json", (req, res) -> {
+                  res.type("application/json");
+                  return gson.toJson(usersObj.getAll());
+              });
+              post("/news/new", "application/json", (req, res) -> {
+                  res.type("application/json");
+                  News news = gson.fromJson(req.body(), News.class);
+                  newsObj.add(news);
+                  res.status(201);
+                  res.type("application/json");
+                  return gson.toJson(news);
+              });
+              get("/news", "application/json", (req, res) -> {
+                  res.type("application/json");
+                  return gson.toJson(newsObj.getAllNews());
+              });
             //filters
               after((req, res) ->{
                   res.type("application/json");

@@ -33,7 +33,7 @@ public class App {
                   return gson.toJson(department);
               }
               );
-
+              /*R*/
               get("/departments", "application/json", (req, res) -> {
                   res.type("application/json");
                   System.out.println(departmentObj.getAll());
@@ -46,7 +46,7 @@ public class App {
                   }
               }
               );
-
+              /*R*/
               get("/departments/:id", "application/json", (req, res) -> {
                   int departmentId = Integer.parseInt(req.params("id"));
                   Departments departmentToFind = departmentObj.findById(departmentId);
@@ -61,7 +61,6 @@ public class App {
               /*Get news by  department Id*/
               get("/departments/:id/news", "application/json", (req, res) -> {
                   int departmentId = Integer.parseInt(req.params("id"));
-
                   Departments departmentToFind = departmentObj.findById(departmentId);
                   List<News> allNews;
                   if (departmentToFind == null){
@@ -82,12 +81,11 @@ public class App {
                   return gson.toJson(user);
               }
               );
-
               /*Add user to department*/
               post("/departments/:id/users/new", "application/json", (req, res) -> {
                   int departmentId = Integer.parseInt(req.params("id"));
                   Users users = gson.fromJson(req.body(), Users.class);
-                  users.setId(departmentId);
+                  users.setId(departmentId);/*Set  id of department*/
                   usersObj.add(users);
                   res.status(201);
                   res.type("application/json");
@@ -98,17 +96,16 @@ public class App {
               get("/users/:user_id/departments","application/json",(request, response) -> {
                   int user_id = Integer.parseInt(request.params("user_id"));
                   Users usersTofind = usersObj.findById(user_id);
-
                   if (usersTofind == null){
                       throw new Exception("User with that id does not exist");
                   }else if(usersObj.getAllDptBelongingToUsers(user_id).size() == 0){
-                      return "{\"message\":\"Opps!the User is not associated with any of the departments\"}";
+                      return "{\"message\":\"User is not associated with any of the departments\"}";
                   }else {
                       return gson.toJson(usersObj.getAllDptBelongingToUsers(user_id));
                   }
               }
               );
-
+            /*All users from Users table*/
               get("/users", "application/json", (req, res) -> {
                   res.type("application/json");
                   return gson.toJson(usersObj.getAll());
@@ -126,6 +123,19 @@ public class App {
                   res.type("application/json");
                   return gson.toJson(newsObj.getAllNews());
               });
+
+              /*Add news to department */
+              post("/departments/:id/news/new","application/json",(request, response) -> {
+                  int id = Integer.parseInt(request.params("id"));
+                  News news = gson.fromJson(request.body(),News.class);
+                  news.setId(id);
+                  newsObj.add(news);
+                  response.type("application/json");
+                  response.status(201);
+                  return gson.toJson(news);
+              }
+              );
+
             //filters
               after((req, res) ->{
                   res.type("application/json");

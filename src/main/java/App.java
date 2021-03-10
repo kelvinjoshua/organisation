@@ -26,11 +26,15 @@ public class App {
 
               /*C*/
               post("/departments/new", "application/json", (request, response) -> {
-                  Departments department = gson.fromJson(request.body(), Department.class);
-                  DepartmentDao.add(department);
+                  Departments department = gson.fromJson(request.body(), Departments.class);
+                  departmentObj.add(department);
                   response.status(201);
                   return gson.toJson(department);
               });
+
+
+
+
             //filters
               after((req, res) ->{
                   res.type("application/json");

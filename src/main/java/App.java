@@ -6,6 +6,8 @@ import models.*;
 import org.sql2o.*;
 import java.util.*;
 
+import spark.ModelAndView;
+import spark.template.handlebars.HandlebarsTemplateEngine;
 import static spark.Spark.*;
 
 public class App {
@@ -31,6 +33,11 @@ public class App {
               usersObj= new sql2oUserDao(sql2o);
               newsObj = new sql2oNewsDao(sql2o);
               conn = sql2o.open();
+              /*sample to see if project deploys*/
+              get("/", (request, response) -> {
+                  Map<String, Object> model = new HashMap<String, Object>();
+                  return new ModelAndView(model, "index.hbs");
+              }, new HandlebarsTemplateEngine());
 
               /*C*/
               post("/departments/new", "application/json", (request, response) -> {

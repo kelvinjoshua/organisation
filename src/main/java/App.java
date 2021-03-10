@@ -72,6 +72,7 @@ public class App {
                   return gson.toJson(allNews);
               }
               );
+
                 /*C*/
               post("/users/new", "application/json", (req, res) -> {
                   Users user = gson.fromJson(req.body(), Users.class);
@@ -81,6 +82,7 @@ public class App {
                   return gson.toJson(user);
               }
               );
+
               /*Add user to department*/
               post("/departments/:id/users/new", "application/json", (req, res) -> {
                   int departmentId = Integer.parseInt(req.params("id"));
@@ -92,11 +94,26 @@ public class App {
                   return gson.toJson(users);
               }
               );
+            /*Get user by associated dept*/
+              get("/users/:user_id/departments","application/json",(request, response) -> {
+                  int user_id = Integer.parseInt(request.params("user_id"));
+                  Users usersTofind = usersObj.findById(user_id);
+
+                  if (usersTofind == null){
+                      throw new Exception("User with that id does not exist");
+                  }else if(usersObj.getAllDptBelongingToUsers(user_id).size() == 0){
+                      return "{\"message\":\"Opps!the User is not associated with any of the departments\"}";
+                  }else {
+                      return gson.toJson(usersObj.getAllDptBelongingToUsers(user_id));
+                  }
+              }
+              );
 
               get("/users", "application/json", (req, res) -> {
                   res.type("application/json");
                   return gson.toJson(usersObj.getAll());
               });
+
               post("/news/new", "application/json", (req, res) -> {
                   res.type("application/json");
                   News news = gson.fromJson(req.body(), News.class);

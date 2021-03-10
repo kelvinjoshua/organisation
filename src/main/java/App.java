@@ -1,6 +1,7 @@
 /*imports*/
 import com.google.gson.Gson;
 import dao.*;
+import exception.ApiException;
 import models.*;
 import org.sql2o.*;
 import java.util.*;
@@ -59,5 +60,6 @@ public class App {
               after((req, res) ->{
                   res.type("application/json");
               });
+              /*Exception*/
       }
 }

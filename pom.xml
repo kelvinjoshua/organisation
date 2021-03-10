@@ -53,6 +53,11 @@
             <version>2.3</version>
             <type>maven-plugin</type>
         </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>1.7.2</version>
+        </dependency>
 
     </dependencies>
     <build>
@@ -95,7 +100,7 @@
                 <configuration>
                     <jdkVersion>1.8</jdkVersion>
                     <!-- Change this to YOUR application name! -->
-                    <appName> firstApi</appName>
+                    <appName> firstapiip</appName>
                     <processTypes>
                         <web>java -jar target/my-app-1.0-jar-with-dependencies.jar</web>
                     </processTypes>

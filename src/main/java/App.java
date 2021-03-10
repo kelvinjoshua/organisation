@@ -1,5 +1,5 @@
 /*imports*/
-import com.google.gson.Gson;
+import com.google.gson.*;
 import dao.*;
 import exception.ApiException;
 import models.*;

@@ -31,7 +31,8 @@ public class App {
                   departmentObj.add(department);
                   response.status(201);
                   return gson.toJson(department);
-              });
+              }
+              );
 
               get("/departments", "application/json", (req, res) -> {
                   res.type("application/json");
@@ -43,7 +44,8 @@ public class App {
                   else {
                       return "{\"message\":\"No departments are currently in the database.\"}";
                   }
-              });
+              }
+              );
 
               get("/departments/:id", "application/json", (req, res) -> {
                   int departmentId = Integer.parseInt(req.params("id"));
@@ -53,7 +55,9 @@ public class App {
                   }
                   res.type("application/json");
                   return gson.toJson(departmentToFind);
-              });
+              }
+              );
+
               /*Get news by  department Id*/
               get("/departments/:id/news", "application/json", (req, res) -> {
                   int departmentId = Integer.parseInt(req.params("id"));
@@ -66,7 +70,17 @@ public class App {
                   allNews = newsObj.getAllNewsByDepartment(departmentId);
                   res.type("application/json");
                   return gson.toJson(allNews);
-              });
+              }
+              );
+                /*C*/
+              post("/users/new", "application/json", (req, res) -> {
+                  Users user = gson.fromJson(req.body(), Users.class);
+                  usersObj.add(user);
+                  res.status(201);
+                  res.type("application/json");
+                  return gson.toJson(user);
+              }
+              );
 
             //filters
               after((req, res) ->{

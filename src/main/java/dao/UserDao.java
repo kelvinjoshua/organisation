@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface UserDao {
     /*Method signatures and CRUD*/
-    Void  add(Users users);
+    void add(Users users);
     /*read*/
     List<Users> getAll();
     List<Users> getAllUsersByDepartment(int departmentId);

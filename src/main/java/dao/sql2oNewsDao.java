@@ -12,8 +12,8 @@ public class sql2oNewsDao  implements  NewsDao{
 
     @Override
     public void add(News news) {
-        String sql = "INSERT INTO news (content, description, departmentid) VALUES (:content,:description, :departmentid)";
-      /*bind  object -alternative way to pass drnamic parameters*/
+        String sql = "INSERT INTO news (content, description, departments_id) VALUES (:content,:description, :departments_id)";
+      /*bind  object -alternative way to pass dynamic parameters*/
         try(Connection con = sql2o.open()){
             int id = (int) con.createQuery(sql, true).bind(news).executeUpdate().getKey();
             news.setId(id);
@@ -38,7 +38,7 @@ public class sql2oNewsDao  implements  NewsDao{
     /*one to many*/
     public List<News> getAllNewsByDepartment(int departmentId) {
         try (Connection con = sql2o.open()) {
-            return con.createQuery("SELECT * FROM news WHERE departmentid = :departmentid").addParameter("departmentid", departmentId).executeAndFetch(News.class);
+            return con.createQuery("SELECT * FROM news WHERE department_id = :department_id").addParameter("department_id", departmentId).executeAndFetch(News.class);
         }
     }
 

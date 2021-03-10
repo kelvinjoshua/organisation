@@ -43,17 +43,17 @@ public class sql2oDepartmentDao implements DepartmentDao {
 
     @Override
     public List<Users> getAllUsersByDept(int departmentid) {
-        String sql = "SELECT * FROM users where departmentid=:departmentid";
+        String sql = "SELECT * FROM users where department_id=:department_id";
         try(Connection conn = sql2o.open()) {
-            return conn.createQuery(sql).addParameter("departmentid", departmentid).executeAndFetch(Users.class);
+            return conn.createQuery(sql).addParameter("department_id", departmentid).executeAndFetch(Users.class);
         }
     }
 
     @Override
     public List<News> getNews(int departmentid) {
-        String sql = "SELECT * FROM news where departmentid=:departmentid";
+        String sql = "SELECT * FROM news where department_id=:department_id";
         try(Connection conn = sql2o.open()) {
-            return conn.createQuery(sql).addParameter("departmentid", departmentid).executeAndFetch(News.class);
+            return conn.createQuery(sql).addParameter("department_id", departmentid).executeAndFetch(News.class);
         }
     }
 

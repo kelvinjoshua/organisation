@@ -29,7 +29,7 @@ public class sql2oUserDao implements UserDao {
     @Override
     public List<Users> getAllUsersByDepartment(int departmentId) {
         try (Connection con = sql2o.open()) {
-            return con.createQuery("SELECT * FROM users WHERE departmentId = :departmentId")
+            return con.createQuery("SELECT * FROM users WHERE department_id = :department_id")
                     .addParameter("departmentId", departmentId)
                     .executeAndFetch(Users.class);
         }
@@ -45,7 +45,7 @@ public class sql2oUserDao implements UserDao {
 
     @Override
     public void addUsersToDepartment(Users users, Departments departments) {
-        String sql = "INSERT INTO departments_users(departmentId, userId) VALUES (:departmentId, :userId)";
+        String sql = "INSERT INTO departments_users(department_id, user_id) VALUES (:department_id, :user_id)";
         try(Connection conn = sql2o.open()){
             conn.createQuery(sql).addParameter("departmentId", departments.getId()).addParameter("userId", users.getId()).throwOnMappingFailure(false).executeUpdate();
         }catch (Sql2oException ex){

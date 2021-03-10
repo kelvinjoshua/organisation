@@ -1,18 +1,27 @@
 /*imports*/
 import com.google.gson.Gson;
-import dao.sql2oUserDao;
-import dao.sql2oDepartmentDao;
-import dao.sql2oNewsDao;
+import dao.*;
 import models.*;
-import org.sql2o.Connection;
-import org.sql2o.Sql2o;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.sql2o.*;
+import java.util.*;
+
 import static spark.Spark.*;
 
 public class App {
           public static void main(String[] args){
+              /*instances to perform operations*/
+              sql2oDepartmentDao departmentObj;
+              sql2oNewsDao newsObj;
+              sql2oUserDao usersObj;
+              Connection conn;
+              Gson gson = new Gson(); /*convert obj to java from json and back*/
+              String connectionString ="";
+              Sql2o sql2o = new Sql2o("");
 
+              /*Connections*/
+              departmentObj = new sql2oDepartmentDao(sql2o);
+              usersObj= new sql2oUserDao(sql2o);
+              newsObj = new sql2oNewsDao(sql2o);
+              conn = sql2o.open();
       }
 }

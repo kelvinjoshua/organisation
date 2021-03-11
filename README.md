@@ -12,6 +12,15 @@
 
 ## Miscellaneous
 * Use http  in your routes while in postman.
+##  Known bugs
+* Association routes commented out to prevent get errors.
+* The app works as excepted however error 404 in live link.
+* Expected status code 201 ,got 200 from request meaning request succesfull but no resource was retrieved.
+  * Below are the routes fired at postman with our app's live link.
+   * path get("/news) ;
+  ![herokulink1](https://user-images.githubusercontent.com/60692205/110860055-57ed2d00-82cd-11eb-8519-c7d156f38a7e.jpg)
+  *  path get("/users);
+  ![herokulink2](https://user-images.githubusercontent.com/60692205/110860538-f2e60700-82cd-11eb-94d8-0e1fc119ba4a.jpg)
 
 ## Database setup
 * In terminal run psql < create.sql.- this creates a new databse with its fields.

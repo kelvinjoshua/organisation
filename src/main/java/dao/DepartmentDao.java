@@ -4,6 +4,7 @@ import models.*;
 import java.util.List;
 
 public interface DepartmentDao {
+
     void add (Departments department);
     List<Departments> getAll();
     /*many to many relationship*/

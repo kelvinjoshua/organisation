@@ -13,7 +13,7 @@ public class sql2oDepartmentDao implements DepartmentDao {
 
     @Override
     public void add(Departments department) {
-        String sql = "INSERT INTO departments(name,description) VALUES(:name,:description)";
+        String sql = "INSERT INTO departments(name,description) VALUES(:name,:description);";
         try (Connection conn = sql2o.open()) {
             int id = (int) conn.createQuery(sql, true).addParameter("name",department.getName()).addParameter("description",department.getDescription()).executeUpdate().getKey();
           /*setters are important for our routes!!*/
@@ -25,8 +25,8 @@ public class sql2oDepartmentDao implements DepartmentDao {
 
     @Override
     public List<Departments> getAll() {
-        try(Connection con = sql2o.open()){
-            return con.createQuery("SELECT * FROM departments").executeAndFetch(Departments.class);
+        try(Connection conn = sql2o.open()){
+            return conn.createQuery( "SELECT * FROM departments").executeAndFetch(Departments.class);
         }
     }
 

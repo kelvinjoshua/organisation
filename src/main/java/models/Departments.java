@@ -11,10 +11,10 @@ public class Departments {
     private int id;
 
     /*Constructor*/
-    public Departments(String name, String description, int user) {
+    public Departments(String name, String description) {
         this.name = name;
         this.description = description;
-        this.user = user;
+        //this.user = user;
     }
 
     /*Getters*/

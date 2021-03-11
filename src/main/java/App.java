@@ -22,15 +22,15 @@ public class App {
               /*instances to perform operations*/
               sql2oDepartmentDao DepartmentDao;
               sql2oNewsDao newsObj;
-              sql2oUserDao usersObj;
+              sql2oUserDao UserDao;
               Connection conn;
               Gson gson = new Gson(); /*convert obj to java from json and back*/
-           String connectionString ="jdbc:postgresql://ec2-54-159-175-113.compute-1.amazonaws.com:5432/db3f6fp0tt5q0p";
-           Sql2o sql2o = new Sql2o(connectionString, "vfouuxjniurlir","01aebc052cb6f50d8ebb2c321e70f6e168d06e8b43994bb320e5f34b08a7bd43");
+          String connectionString ="jdbc:postgresql://ec2-54-164-22-242.compute-1.amazonaws.com:5432/dbq1sgh4qbl6of";
+           Sql2o sql2o = new Sql2o(connectionString, "zleejguknelkym","22f5f90071136259e8d6804c932d9b2e2c36e299bf1884534418e9be31072739");
            //Sql2o sql2o = new Sql2o("jdbc:postgresql://localhost:5432/department_news", "bale","kelvin23");
 
               DepartmentDao = new sql2oDepartmentDao(sql2o);
-              usersObj= new sql2oUserDao(sql2o);
+              UserDao= new sql2oUserDao(sql2o);
               newsObj = new sql2oNewsDao(sql2o);
               conn = sql2o.open();
 
@@ -46,9 +46,7 @@ public class App {
               /*R*/
               get("/departments", "application/json", (req, res) -> {
                   res.type("application/json");
-                  //System.out.println(DepartmentDao.getAll());
-                      return gson.toJson(
-                              DepartmentDao.getAll());
+                      return gson.toJson(DepartmentDao.getAll());
               }
               );
               /*R*/
@@ -80,7 +78,7 @@ public class App {
                 /*C*/
               post("/users/new", "application/json", (req, res) -> {
                   Users user = gson.fromJson(req.body(), Users.class);
-                  usersObj.add(user);
+                  UserDao.add(user);
                   res.status(201);
                   res.type("application/json");
                   return gson.toJson(user);
@@ -91,7 +89,7 @@ public class App {
                   int departmentId = Integer.parseInt(req.params("id"));
                   Users users = gson.fromJson(req.body(), Users.class);
                   users.setId(departmentId);/*Set  id of department*/
-                  usersObj.add(users);
+                  UserDao.add(users);
                   res.status(201);
                   res.type("application/json");
                   return gson.toJson(users);
@@ -100,20 +98,20 @@ public class App {
             /*Get user by associated dept*/
               get("/users/:user_id/departments","application/json",(request, response) -> {
                   int user_id = Integer.parseInt(request.params("user_id"));
-                  Users usersTofind = usersObj.findById(user_id);
+                  Users usersTofind = UserDao.findById(user_id);
                   if (usersTofind == null){
                       throw new Exception("User with that id does not exist");
-                  }else if(usersObj.getAllDptBelongingToUsers(user_id).size() == 0){
+                  }else if(UserDao.getAllDptBelongingToUsers(user_id).size() == 0){
                       return "{\"message\":\"User is not associated with any of the departments\"}";
                   }else {
-                      return gson.toJson(usersObj.getAllDptBelongingToUsers(user_id));
+                      return gson.toJson(UserDao.getAllDptBelongingToUsers(user_id));
                   }
               }
               );
             /*All users from Users table*/
               get("/users", "application/json", (req, res) -> {
                   res.type("application/json");
-                  return gson.toJson(usersObj.getAll());
+                  return gson.toJson(UserDao.getAll());
               });
 
               post("/news/new", "application/json", (req, res) -> {

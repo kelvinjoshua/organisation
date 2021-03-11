@@ -1,1 +1,1 @@
-web: java -jar target/firstapiip-1.0-jar-with-dependencies.jar
+web: java -jar target/Organisation-1.0-jar-with-dependencies.jar

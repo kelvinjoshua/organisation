@@ -5,12 +5,12 @@ import java.util.Objects;
 public class Users {
     private int id;
     private String name;
-    private int departmentid;
+   // private int departmentid;
     private String role;
 
-    public Users(String name, int departmentid, String role) {
+    public Users(String name, String role) {
         this.name = name;
-        this.departmentid = departmentid;
+       // this.departmentid = departmentid;
         this.role = role;
     }
 /*getters*/
@@ -20,9 +20,10 @@ public class Users {
     public String getName() {
         return name;
     }
+    /*
     public int getDepartmentId() {
         return departmentid;
-    }
+    }*/
     public String getRole() {
         return role;
     }
@@ -36,22 +37,23 @@ public class Users {
     public void setId(int id) {
         this.id = id;
     }
+    /*
     public void setDepartmentId(int departmentid) {
         this.departmentid = departmentid;
     }
-
+*/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Users)) return false;
         Users user = (Users) o;//type cast
-        return departmentid == user.departmentid &&
+        return
                 Objects.equals(name, user.name) &&
                 Objects.equals(role, user.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, departmentid, role);
+        return Objects.hash(name, role);
     }
 }

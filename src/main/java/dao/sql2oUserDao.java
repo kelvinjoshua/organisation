@@ -10,10 +10,11 @@ public class sql2oUserDao implements UserDao {
 
     @Override
     public void add(Users user) {
-        String sql = "INSERT INTO users(name,  role,) VALUES (:name, :role)";
+        String sql = "INSERT INTO users(name,  role) VALUES (:name, :role);";
         try(Connection conn = sql2o.open()){
-            int id = (int) conn.createQuery(sql, true).bind(user).executeUpdate().getKey();
-            user.setId(id);
+            int id = (int) conn.createQuery(sql, true).addParameter("name",user.getName()).addParameter("role",user.getRole()).
+                    executeUpdate().getKey();
+          user.setId(id);
         }catch (Sql2oException ex){
             System.out.println(ex);
         }

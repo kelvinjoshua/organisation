@@ -37,6 +37,19 @@ public class App {
 
 
               /*C*/
+              post("/users/new", "application/json", (req, res) -> {
+                          Users user = gson.fromJson(req.body(), Users.class);
+                          UserDao.add(user);
+                          res.status(201);
+                          res.type("application/json");
+                          return gson.toJson(user);
+                      }
+              );
+              /*All users from Users table*/
+              get("/users", "application/json", (req, res) -> {
+                  res.type("application/json");
+                  return gson.toJson(UserDao.getAll());
+              });
               post("/departments/new", "application/json", (request, response) -> {
                   Departments department = gson.fromJson(request.body(), Departments.class);
                   DepartmentDao.add(department);
@@ -77,14 +90,7 @@ public class App {
               );
 
                 /*C*/
-              post("/users/new", "application/json", (req, res) -> {
-                  Users user = gson.fromJson(req.body(), Users.class);
-                  UserDao.add(user);
-                  res.status(201);
-                  res.type("application/json");
-                  return gson.toJson(user);
-              }
-              );
+
               /*Add user to department*/
               post("/departments/:id/users/new", "application/json", (req, res) -> {
                   int departmentId = Integer.parseInt(req.params("id"));
@@ -109,11 +115,7 @@ public class App {
                   }
               }
               );
-            /*All users from Users table*/
-              get("/users", "application/json", (req, res) -> {
-                  res.type("application/json");
-                  return gson.toJson(UserDao.getAll());
-              });
+
 
               post("/news/new", "application/json", (req, res) -> {
                   res.type("application/json");

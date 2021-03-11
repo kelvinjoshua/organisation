@@ -1,13 +1,17 @@
 ## Author.
 * Kelvin Joshua Bale
 ##  Description.
+* The project is a Java REST API application built with GSON serialization/deserialization library which converts Java Objects into JSON and back, thus one is able to query and receive information from the news organization's API.
+## Database setup
+* In terminal run psql < create.sql.
 ##Live link.
+
 ## Technologies used
 * Java.
 * Postgres.
 * Heroku.
 * Postman.
-## Setup
+
 ##license.
 copyright (c) 2021 kelvinjoshua
 

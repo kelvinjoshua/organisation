@@ -6,10 +6,10 @@ public class News {
     private String content;
     private String description;
 
-    public News(String content, String description, int departmentid) {
+    public News(String content, String description) {
         this.content = content;
         this.description = description;
-        this.departmentid = departmentid;
+       // this.departmentid = departmentid;
     }
     /*Getters*/
     public String getContent() {

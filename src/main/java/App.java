@@ -25,21 +25,16 @@ public class App {
               sql2oUserDao usersObj;
               Connection conn;
               Gson gson = new Gson(); /*convert obj to java from json and back*/
-              String connectionString ="jdbc:postgresql://ec2-54-159-175-113.compute-1.amazonaws.com:5432/db3f6fp0tt5q0p";
-              Sql2o sql2o = new Sql2o(connectionString, "vfouuxjniurlir","01aebc052cb6f50d8ebb2c321e70f6e168d06e8b43994bb320e5f34b08a7bd43");
+           String connectionString ="jdbc:postgresql://ec2-54-159-175-113.compute-1.amazonaws.com:5432/db3f6fp0tt5q0p";
+           Sql2o sql2o = new Sql2o(connectionString, "vfouuxjniurlir","01aebc052cb6f50d8ebb2c321e70f6e168d06e8b43994bb320e5f34b08a7bd43");
+           //Sql2o sql2o = new Sql2o("jdbc:postgresql://localhost:5432/department_news", "bale","kelvin23");
 
-              /*Connections*/
               departmentObj = new sql2oDepartmentDao(sql2o);
               usersObj= new sql2oUserDao(sql2o);
               newsObj = new sql2oNewsDao(sql2o);
               conn = sql2o.open();
-              /*sample to see if project deploys*/
-                /*
-              get("/", (request, response) -> {
-                  Map<String, Object> model = new HashMap<String, Object>();
-                  return new ModelAndView(model, "index.hbs");
-              }, new HandlebarsTemplateEngine());
-            /*
+
+
               /*C*/
               post("/departments/new", "application/json", (request, response) -> {
                   Departments department = gson.fromJson(request.body(), Departments.class);
@@ -160,6 +155,7 @@ public class App {
               after((req, res) ->{
                   res.type("application/json");
               });
+
               /*Exception*/
               exception(ApiException.class, (exc, req, res) -> {
                   ApiException err = (ApiException) exc;

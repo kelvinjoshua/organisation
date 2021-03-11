@@ -75,7 +75,7 @@ public class App {
               }
               );
 
-              /*Get news by  department Id*/
+              /*Get news by  department Id
               get("/departments/:id/news", "application/json", (req, res) -> {
                   int departmentId = Integer.parseInt(req.params("id"));
                   Departments departmentToFind = DepartmentDao.findById(departmentId);
@@ -91,18 +91,18 @@ public class App {
 
                 /*C*/
 
-              /*Add user to department*/
+              /*Add user to department
               post("/departments/:id/users/new", "application/json", (req, res) -> {
                   int departmentId = Integer.parseInt(req.params("id"));
                   Users users = gson.fromJson(req.body(), Users.class);
                   users.setId(departmentId);/*Set  id of department*/
-                  UserDao.add(users);
+               /*   UserDao.add(users);
                   res.status(201);
                   res.type("application/json");
                   return gson.toJson(users);
               }
-              );
-            /*Get user by associated dept*/
+              ); */
+            /*Get user by associated dept
               get("/users/:user_id/departments","application/json",(request, response) -> {
                   int user_id = Integer.parseInt(request.params("user_id"));
                   Users usersTofind = UserDao.findById(user_id);
@@ -114,7 +114,7 @@ public class App {
                       return gson.toJson(UserDao.getAllDptBelongingToUsers(user_id));
                   }
               }
-              );
+              );*/
 
 
               post("/news/new", "application/json", (req, res) -> {
@@ -130,7 +130,7 @@ public class App {
                   return gson.toJson(newsObj.getAllNews());
               });
 
-              /*Add news to department */
+              /*Add news to department
               post("/departments/:id/news/new","application/json",(request, response) -> {
                   int id = Integer.parseInt(request.params("id"));
                   News news = gson.fromJson(request.body(),News.class);
@@ -141,12 +141,12 @@ public class App {
                   return gson.toJson(news);
               }
               );
-            /*Get news of a certain department*/
+            /*Get news of a certain department
               get("/departments/:id/departmentNews", "application/json", (request, response) -> {
                   int id = Integer.parseInt(request.params("id"));
                   Departments departmentToFind = DepartmentDao.findById(id);
                   return gson.toJson(newsObj.getAllNewsByDepartment(id)); /**/
-              });
+             // });
             //filters
               after((req, res) ->{
                   res.type("application/json");
